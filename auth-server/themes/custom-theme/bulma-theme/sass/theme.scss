@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+// Colors
+
+$black:        hsl(0, 0%, 4%);
+$black-bis:    hsl(0, 0%, 7%);
+$black-ter:    hsl(0, 0%, 14%);
+
+$grey-darker:  hsl(0, 0%, 21%);
+$grey-dark:    hsl(0, 0%, 29%);
+$grey:         hsl(0, 0%, 48%);
+$grey-light:   hsl(0, 0%, 71%);
+$grey-lighter: hsl(0, 0%, 86%);
+$grey-lightest: hsl(0, 0%, 93%);
+
+$white-ter:    hsl(0, 0%, 96%);
+$white-bis:    hsl(0, 0%, 98%);
+$white:        hsl(0, 0%, 100%);
+
+$orange:       #e67e22;
+$yellow:       #f1c40f;
+$green:        #27ae60;
+$turquoise:    #1abc9c;
+$cyan:         rgb(50,180,200);
+$blue:         #3498db;
+$purple:       #9b59b6;
+$red:          #e74c3c;
+
+$family-sans-serif: 'Raleway', BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+$easing: ease;
+$radius-small: 0;
+$radius: 2px;
+$radius-large: 4px;
+
+$radius-rounded: 50%;
+$primary: $purple;
+
+
+$input-shadow: none;
+
+@import "../node_modules/bulma/sass/utilities/_all";
+@import "../node_modules/bulma/sass/base/_all";
+@import "../node_modules/bulma/sass/elements/button";
+@import "../node_modules/bulma/sass/elements/container";
+@import "../node_modules/bulma/sass/elements/content";
+@import "../node_modules/bulma/sass/elements/title";
+@import "../node_modules/bulma/sass/form/_all";
+// @import "../node_modules/bulma/sass/components/dropdown";
+@import "../node_modules/bulma/sass/grid/columns";

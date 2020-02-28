@@ -1,0 +1,33 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  overflow: auto;
+}
+
+.ms-login-page {
+  background: #efefef;
+  min-height: 100%;
+}
+
+.ms-card {
+  background: #fff;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+.ms-login-page .ms-card {
+  max-width: 500px;
+}
+
+.ms-page-header {
+  display: none;
+}
+
+.ms-form-header {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
