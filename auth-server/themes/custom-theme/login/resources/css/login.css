@@ -9,7 +9,7 @@ body {
 
 .ms-login-page {
   align-items: center;
-  background: #efefef;
+  background: url('../img/backgrounds/silver_scales.png');
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +19,9 @@ body {
 
 .ms-card {
   background: #fff;
-  padding: 16px 24px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px 0 #ccc;
+  padding: 16px 24px 24px;
 }
 
 .ms-login-page .ms-card {
@@ -28,11 +30,36 @@ body {
 }
 
 .ms-page-header {
+  color: #aaa;
+  font-size: 1em;
+  font-weight: bold;
   margin: 20px;
+}
+
+.ms-header {
+  margin: 1em 0 2em;
+}
+
+.ms-header h1 {
+  font-size: 38px;
+  font-weight: 900;
 }
 
 .ms-form-header {
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+}
+
+.field:not(:last-child), .field {
+  margin-bottom: 1.5em;
+}
+
+.field .label {
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5em;
+}
+
+.ms-buttons {
+  margin: 0.5rem 0;
 }
