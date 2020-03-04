@@ -7,7 +7,7 @@ function styles() {
     return gulp.src(['sass/*'])
         .pipe(sass())
         .pipe(cleanCSS())
-        .pipe(gulp.dest('css/'))
+        .pipe(gulp.dest('resources/css/'))
         .pipe(browserSync.stream())
 }
 

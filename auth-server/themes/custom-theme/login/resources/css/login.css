@@ -8,22 +8,27 @@ body {
 }
 
 .ms-login-page {
+  align-items: center;
   background: #efefef;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-height: 100%;
+  padding: 20px;
 }
 
 .ms-card {
   background: #fff;
-  margin: 0 auto;
   padding: 16px 24px;
 }
 
 .ms-login-page .ms-card {
-  max-width: 500px;
+  max-width: 450px;
+  width: 100%;
 }
 
 .ms-page-header {
-  display: none;
+  margin: 20px;
 }
 
 .ms-form-header {
