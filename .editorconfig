@@ -15,7 +15,7 @@ ij_formatter_tags_enabled = false
 ij_smart_tabs = false
 ij_wrap_on_typing = false
 
-[*.{css, js}]
+[*.{css, js, yml, kts}]
 indent_size = 2
 
 [*.kubernetes]

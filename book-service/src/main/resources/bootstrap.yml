@@ -1,0 +1,19 @@
+server:
+  port: 9000
+
+
+
+spring:
+  application:
+    name: books
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+
+      config:
+        failFast: false
+
+      discovery:
+        failFast: false

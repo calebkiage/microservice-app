@@ -1,0 +1,17 @@
+{
+  "service": {
+    "name": "auth",
+    "tags": ["auth"],
+    "port": 8080,
+    "checks": [
+      {
+        "id": "health",
+        "name": "Health check on port 9990",
+        "http": "http://auth:9990/health",
+        "method": "GET",
+        "interval": "10s",
+        "timeout": "1s"
+      }
+    ]
+  }
+}
