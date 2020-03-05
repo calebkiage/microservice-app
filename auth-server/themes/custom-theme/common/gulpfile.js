@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var browserSync = require('browser-sync').create();
 var cleanCSS = require('gulp-clean-css');
 
 function styles() {
@@ -8,23 +7,6 @@ function styles() {
         .pipe(sass())
         .pipe(cleanCSS())
         .pipe(gulp.dest('resources/css/'))
-        .pipe(browserSync.stream())
-}
-
-function reload(done) {
-    browserSync.reload();
-    done();
-}
-
-function serve(done) {
-    browserSync.init({
-        open: false,
-        port: 8000,
-        server: {
-            baseDir: './'
-        }
-    });
-    done();
 }
 
 function watchSass() {
@@ -32,9 +14,9 @@ function watchSass() {
 }
 
 function watchHtml() {
-    return gulp.watch('*.html', reload);
+    return gulp.watch('*.html');
 }
 
-const dev = gulp.series(styles, serve, gulp.parallel(watchSass, watchHtml));
+const dev = gulp.series(styles, gulp.parallel(watchSass, watchHtml));
 exports.styles = styles;
 exports.default = dev;

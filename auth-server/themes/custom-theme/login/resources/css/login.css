@@ -18,9 +18,6 @@ body {
 }
 
 .ms-card {
-  background: #fff;
-  border-radius: 3px;
-  box-shadow: 0 2px 6px 0 #ccc;
   padding: 16px 24px 24px;
 }
 
@@ -62,4 +59,20 @@ body {
 
 .ms-buttons {
   margin: 0.5rem 0;
+}
+
+.alert {
+  margin-bottom: 1em;
+}
+
+.alert.alert-error {
+  color: #e74c3c;
+}
+
+.has-error .input {
+  border-color: #e74c3c;
+}
+
+.ms-form-options-wrapper {
+  margin-top: 0.75em;
 }
