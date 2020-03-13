@@ -1,5 +1,6 @@
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import com.google.cloud.tools.jib.gradle.JibExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.springframework.boot") version "2.2.5.RELEASE" apply false
@@ -24,12 +25,36 @@ subprojects {
     }
 }
 
+val kotlinProjects = listOf(project(":book-service"))
+
+configure(kotlinProjects) {
+  apply(plugin = "java-library")
+  apply(plugin = "org.jetbrains.kotlin.jvm")
+  apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+
+  repositories {
+    mavenLocal()
+    mavenCentral()
+  }
+
+
+  configure<JavaPluginExtension> {
+    sourceCompatibility = JavaVersion.VERSION_11
+  }
+
+  tasks.withType<KotlinCompile> {
+    kotlinOptions {
+      freeCompilerArgs = listOf("-Xjsr305=strict")
+      jvmTarget = "1.8"
+    }
+  }
+}
+
 val webProjects = listOf(project(":book-service"))
 
 configure(webProjects) {
   apply(plugin = "com.google.cloud.tools.jib")
   apply(plugin = "io.spring.dependency-management")
-  apply(plugin = "java-library")
 
   configurations {
     "implementation" {

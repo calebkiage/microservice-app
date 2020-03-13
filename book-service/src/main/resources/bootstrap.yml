@@ -13,7 +13,8 @@ spring:
       port: 8500
 
       config:
-        failFast: false
+        failFast: true # Enable connection retry
+        profileSeparator: '::'
 
       discovery:
         failFast: false

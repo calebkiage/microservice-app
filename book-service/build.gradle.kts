@@ -1,16 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   id("com.google.cloud.tools.jib")
   id("io.spring.dependency-management")
   id("org.springframework.boot")
-  kotlin("jvm")
-  kotlin("plugin.spring")
-}
-
-java.sourceCompatibility = JavaVersion.VERSION_11
-
-repositories {
-  mavenCentral()
 }
 
 dependencies {
@@ -30,13 +21,6 @@ dependencies {
 
 tasks.withType<Test> {
   useJUnitPlatform()
-}
-
-tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "1.8"
-  }
 }
 
 jib {
