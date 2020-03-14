@@ -10,7 +10,7 @@ plugins {
     id("com.google.cloud.tools.jib") version "2.1.0" apply false
 }
 
-extra["springCloudVersion"] = "Hoxton.SR1"
+extra["springCloudVersion"] = "Hoxton.SR3"
 
 group = "com.example.microservice"
 version = "0.0.1-SNAPSHOT"
@@ -76,5 +76,5 @@ configure(webProjects) {
 
 tasks.withType<Wrapper> {
     distributionType = Wrapper.DistributionType.BIN
-    gradleVersion = "6.2.1"
+    gradleVersion = "6.2.2"
 }
