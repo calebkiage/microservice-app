@@ -25,10 +25,34 @@ subprojects {
     }
 }
 
-val kotlinProjects = listOf(project(":book-service"))
+val webProjects = listOf(project(":book-service"), project(":transactions-service"))
+
+configure(webProjects) {
+  apply(plugin = "com.google.cloud.tools.jib")
+  apply(plugin = "io.spring.dependency-management")
+  apply(plugin = "java-library")
+
+  configurations {
+    "implementation" {
+      exclude("org.springframework.boot", "spring-boot-starter-tomcat")
+      exclude("org.springframework.cloud", "spring-cloud-starter-netflix-ribbon")
+    }
+  }
+
+  dependencies {
+    "implementation"("org.springframework.boot:spring-boot-starter-undertow")
+  }
+
+  configure<JibExtension> {
+    container {
+      labels = mapOf(Pair("MAINTAINER", "Caleb Kiage <caleb.kiage@gmail.com>"))
+    }
+  }
+}
+
+val kotlinProjects = listOf(*webProjects.toTypedArray())
 
 configure(kotlinProjects) {
-  apply(plugin = "java-library")
   apply(plugin = "org.jetbrains.kotlin.jvm")
   apply(plugin = "org.jetbrains.kotlin.plugin.spring")
 
@@ -46,30 +70,6 @@ configure(kotlinProjects) {
     kotlinOptions {
       freeCompilerArgs = listOf("-Xjsr305=strict")
       jvmTarget = "1.8"
-    }
-  }
-}
-
-val webProjects = listOf(project(":book-service"))
-
-configure(webProjects) {
-  apply(plugin = "com.google.cloud.tools.jib")
-  apply(plugin = "io.spring.dependency-management")
-
-  configurations {
-    "implementation" {
-      exclude("org.springframework.boot", "spring-boot-starter-tomcat")
-      exclude("org.springframework.cloud", "spring-cloud-starter-netflix-ribbon")
-    }
-  }
-
-  dependencies {
-    "implementation"("org.springframework.boot:spring-boot-starter-undertow")
-  }
-
-  configure<JibExtension> {
-    container {
-      labels = mapOf(Pair("MAINTAINER", "Caleb Kiage <caleb.kiage@gmail.com>"))
     }
   }
 }

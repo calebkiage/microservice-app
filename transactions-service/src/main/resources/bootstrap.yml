@@ -1,10 +1,9 @@
 server:
   port: 9000
 
-
 spring:
   application:
-    name: books
+    name: transactions
 
   cloud:
     consul:
