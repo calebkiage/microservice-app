@@ -1,11 +1,11 @@
-package com.example.microservice.books
+package com.example.microservice.messages
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-class BookServiceApplication
+class MessagesServiceApplication
 
 fun main(args: Array<String>) {
-    SpringApplication.run(arrayOf(BookServiceApplication::class.java), args)
+    SpringApplication.run(arrayOf(MessagesServiceApplication::class.java), args)
 }

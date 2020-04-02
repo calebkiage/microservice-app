@@ -1,0 +1,15 @@
+app:
+  messaging:
+    routing-keys:
+      unread-messages: app.messages.notifications.UnreadMessages
+
+server:
+  port: 9100
+
+spring:
+  rabbitmq:
+    template:
+      exchange: com.example.microservice
+      retry:
+        enabled: true
+        initial-interval: 2s

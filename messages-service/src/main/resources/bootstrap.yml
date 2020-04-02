@@ -1,15 +1,9 @@
-server:
-  port: 9000
-
 spring:
   application:
-    name: transactions
+    name: books
 
   cloud:
     consul:
-      host: localhost
-      port: 8500
-
       config:
         failFast: true # Enable connection retry
         profileSeparator: '::'
