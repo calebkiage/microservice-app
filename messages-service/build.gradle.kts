@@ -1,36 +1,40 @@
+import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
+
 plugins {
-  id("com.google.cloud.tools.jib")
-  id("io.spring.dependency-management")
-  id("org.springframework.boot")
+  id("org.springframework.boot") version "2.2.5.RELEASE" apply false
+  id("io.spring.dependency-management") version "1.0.9.RELEASE" apply false
+  kotlin("jvm") version "1.3.61" apply false
+  kotlin("plugin.spring") version "1.3.61" apply false
+  id("com.google.cloud.tools.jib") version "2.1.0" apply false
+  id("io.gitlab.arturbosch.detekt") version "1.7.3" apply false
 }
 
-dependencies {
-  implementation(project(":core"))
-  implementation("org.springframework.boot:spring-boot-starter-actuator")
-  implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-  implementation("org.springframework.boot:spring-boot-starter-web")
-  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-  implementation("org.jetbrains.kotlin:kotlin-reflect")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-  implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
-  implementation("org.springframework.cloud:spring-cloud-starter-consul-config")
-  implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
-  implementation("org.springframework.kafka:spring-kafka")
+extra["springCloudVersion"] = "Hoxton.SR3"
 
-  runtimeOnly("com.h2database:h2")
+group = "com.example.microservice"
+version = "0.0.1-SNAPSHOT"
 
-  testImplementation("org.springframework.boot:spring-boot-starter-test") {
-    exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+subprojects {
+  apply(plugin = "io.spring.dependency-management")
+  apply(plugin = "io.gitlab.arturbosch.detekt")
+
+  repositories {
+    jcenter()
+    mavenCentral()
   }
 
-  testImplementation("org.springframework.kafka:spring-kafka-test")
+  the<DependencyManagementExtension>().apply {
+    imports {
+      mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
+  }
+
+  dependencies {
+    "detektPlugins"("io.gitlab.arturbosch.detekt:detekt-formatting:1.7.3")
+  }
 }
 
-jib {
-  container {
-    ports = listOf("9100")
-  }
-  to {
-    image = "calebkiage/microservice-messages-service"
-  }
+tasks.withType<Wrapper> {
+  distributionType = Wrapper.DistributionType.BIN
+  gradleVersion = "6.3"
 }
