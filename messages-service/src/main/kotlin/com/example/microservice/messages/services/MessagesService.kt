@@ -5,12 +5,12 @@ import com.example.microservice.core.models.PagedResult
 import com.example.microservice.core.models.messaging.UnreadMessageNotification
 import com.example.microservice.messages.config.messaging.MessagingProperties
 import com.example.microservice.messages.models.Message
-import org.springframework.amqp.core.AmqpTemplate
+import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Component
 
 @Component
 class MessagesService(
-    private val amqpTemplate: AmqpTemplate,
+    private val kafkaTemplate: KafkaTemplate<String, String>,
     private val msgProperties: MessagingProperties
 ) {
     fun getMessages(
@@ -33,8 +33,8 @@ class MessagesService(
         // TODO: Send a message
 
         // Notify of unread message
-        val routingKey = this.msgProperties.routingKeys.unreadMessages
+        val unreadTopic = this.msgProperties.topics.unreadMessages
         val msg = UnreadMessageNotification(userId)
-        this.amqpTemplate.convertAndSend(routingKey, msg)
+        this.kafkaTemplate.send(unreadTopic, msg.userId)
     }
 }

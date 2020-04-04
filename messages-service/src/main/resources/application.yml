@@ -1,13 +1,22 @@
 app:
   messaging:
-    routing-keys:
+    topic-name: app.messages.topic
+    topics:
       unread-messages: app.messages.notifications.UnreadMessages
 
 server:
   port: 9100
 
 spring:
-  rabbitmq:
+  kafka:
+    client-id: messages-service
+    consumer:
+      client-id: messages-service-consumer
+    producer:
+      client-id: messages-service-producer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 5
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
     template:
       exchange: com.example.microservice
       retry:

@@ -7,7 +7,6 @@ plugins {
 dependencies {
   implementation(project(":core"))
   implementation("org.springframework.boot:spring-boot-starter-actuator")
-  implementation("org.springframework.boot:spring-boot-starter-amqp")
   implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -24,7 +23,7 @@ dependencies {
     exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
   }
 
-  testImplementation("org.springframework.amqp:spring-rabbit-test")
+  testImplementation("org.springframework.kafka:spring-kafka-test")
 }
 
 jib {

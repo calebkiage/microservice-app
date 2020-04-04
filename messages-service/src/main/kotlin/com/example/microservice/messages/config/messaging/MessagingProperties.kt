@@ -8,6 +8,6 @@ import javax.validation.constraints.NotEmpty
 @ConstructorBinding
 @ConfigurationProperties("app.messaging")
 @Validated
-data class MessagingProperties(val routingKeys: AppRoutingKeys) {
-    data class AppRoutingKeys(@NotEmpty val unreadMessages: String)
+data class MessagingProperties(val topics: AppTopics) {
+    data class AppTopics(@NotEmpty val unreadMessages: String)
 }

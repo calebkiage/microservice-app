@@ -4,7 +4,7 @@ services:
     image: jboss/keycloak:9.0.2
     environment:
       - DB_ADDR=db
-      - DB_USER=keycloak
+      - DB_USER=user
       - DB_PASSWORD=password
       - DB_VENDOR=postgres
       # https://hub.docker.com/r/jboss/keycloak
@@ -24,10 +24,13 @@ services:
     image: postgres:12-alpine
     environment:
       - POSTGRES_DB=keycloak
-      - POSTGRES_USER=keycloak
+      - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
     volumes:
       - "db_data:/var/lib/postgresql/data"
+      - "./tools/init-scripts:/docker-entrypoint-initdb.d/"
 
   consul:
     image: consul:1.7.1
@@ -36,17 +39,35 @@ services:
     volumes:
       - "./consul/config:/consul/config"
 
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
+  zookeeper:
+    image: bitnami/zookeeper:3
     environment:
-      - RABBITMQ_DEFAULT_USER=user
-      - RABBITMQ_DEFAULT_PASS=password
-    ports:
-      - "5672:5672"
-      - "15672:15672"
+      - ZOO_ENABLE_AUTH=yes
+      - ZOO_CLIENT_USER=user
+      - ZOO_CLIENT_PASSWORD=password
     volumes:
-      - "rabbitmq_data:/var/lib/rabbitmq"
+      - "zookeeper_data:/bitnami/zookeeper"
+
+  kafka:
+    image: bitnami/kafka:2
+    ports:
+      - '9092:9092'
+    volumes:
+      - 'kafka_data:/bitnami/kafka'
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ZOOKEEPER_USER=user
+      - KAFKA_ZOOKEEPER_PASSWORD=password
+      - KAFKA_BROKER_USER=user
+      - KAFKA_BROKER_PASSWORD=password
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+    depends_on:
+      - zookeeper
 
 volumes:
   db_data:
-  rabbitmq_data:
+  zookeeper_data:
+  kafka_data:
