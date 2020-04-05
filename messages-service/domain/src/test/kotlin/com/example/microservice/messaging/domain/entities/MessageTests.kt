@@ -23,6 +23,28 @@ class MessageTests {
     }
 
     @Nested
+    @DisplayName("on construction")
+    inner class CreateMessageTests {
+        @Test
+        fun `should reject a message with blank content`() {
+            // Arrange + Act + Assert
+            Assertions.assertThrows(IllegalArgumentException::class.java) {
+                Message("")
+            }
+        }
+
+        @ParameterizedTest(name = "should trim start and end spaces [{index}]\n{argumentsWithNames}")
+        @ValueSource(strings = [" test", "test ", "\n\ntest"])
+        fun `should trim start and end spaces`(testString: String) {
+            // Arrange + Act
+            val message = Message(testString)
+
+            // Assert
+            Assertions.assertEquals("test", message.content)
+        }
+    }
+
+    @Nested
     @DisplayName("when edit")
     inner class EditMessageTests {
         @Test
@@ -62,7 +84,7 @@ class MessageTests {
             }
         }
 
-        @ParameterizedTest
+        @ParameterizedTest(name = "should trim start and end spaces [{index}]\n{argumentsWithNames}")
         @ValueSource(strings = [" test", "test ", "\n\ntest"])
         fun `should trim start and end spaces`(testString: String) {
             // Arrange
@@ -70,7 +92,7 @@ class MessageTests {
             val message = message!!
 
             // Act
-            message.editContent(" test \n")
+            message.editContent(testString)
 
             // Assert
             Assertions.assertEquals("test", message.content)
@@ -96,7 +118,7 @@ class MessageTests {
         }
 
         @Test
-        fun `should not send a message more than once`(): Unit {
+        fun `should not send a message more than once`() {
             // Arrange
             Assertions.assertNotNull(message)
             val message = message!!
