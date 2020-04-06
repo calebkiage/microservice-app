@@ -2,8 +2,8 @@ package com.example.microservice.messaging.application.usecases
 
 import com.example.microservice.messaging.application.models.MessageDto
 import com.example.microservice.messaging.application.ports.MessageMapper
-import com.example.microservice.messaging.application.ports.MessageReader
-import com.example.microservice.messaging.application.ports.ViewUseCaseInputPort
+import com.example.microservice.messaging.application.ports.store.MessageReader
+import com.example.microservice.messaging.application.ports.view.ViewUseCaseInputPort
 
 class ViewUseCase(
     private val messageReader: MessageReader,

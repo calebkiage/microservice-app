@@ -2,8 +2,8 @@ package com.example.microservice.messaging.adapters.controllers
 
 import com.example.microservice.messaging.adapters.controllers.mappers.WebMessageMapper
 import com.example.microservice.messaging.adapters.controllers.models.ExtMessage
-import com.example.microservice.messaging.application.ports.SendUseCaseInputPort
-import com.example.microservice.messaging.application.ports.ViewUseCaseInputPort
+import com.example.microservice.messaging.application.ports.send.SendUseCaseInputPort
+import com.example.microservice.messaging.application.ports.view.ViewUseCaseInputPort
 
 open class MessagesController(
     private val sendUseCase: SendUseCaseInputPort,

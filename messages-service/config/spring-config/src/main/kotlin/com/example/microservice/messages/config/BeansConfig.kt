@@ -5,16 +5,15 @@ import com.example.microservice.messaging.adapters.controllers.mappers.WebMessag
 import com.example.microservice.messaging.adapters.database.MemoryMessageRepository
 import com.example.microservice.messaging.adapters.database.SpringJdbcMessageRepository
 import com.example.microservice.messaging.application.ports.MessageMapper
-import com.example.microservice.messaging.application.ports.MessageReader
-import com.example.microservice.messaging.application.ports.MessageStore
-import com.example.microservice.messaging.application.ports.MessageWriter
-import com.example.microservice.messaging.application.ports.SendUseCaseInputPort
-import com.example.microservice.messaging.application.ports.ViewUseCaseInputPort
+import com.example.microservice.messaging.application.ports.store.MessageReader
+import com.example.microservice.messaging.application.ports.store.MessageStore
+import com.example.microservice.messaging.application.ports.store.MessageWriter
+import com.example.microservice.messaging.application.ports.send.SendUseCaseInputPort
+import com.example.microservice.messaging.application.ports.view.ViewUseCaseInputPort
 import com.example.microservice.messaging.application.usecases.SendUseCase
 import com.example.microservice.messaging.application.usecases.ViewUseCase
 import org.mapstruct.factory.Mappers
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
 import org.springframework.jdbc.core.JdbcTemplate
 

@@ -1,7 +1,7 @@
 package com.example.microservice.messaging.application.usecases
 
 import com.example.microservice.messaging.application.data.PersistentMessage
-import com.example.microservice.messaging.application.ports.MessageWriter
+import com.example.microservice.messaging.application.ports.store.MessageWriter
 import com.example.microservice.messaging.application.ports.MessageMapper
 import com.example.microservice.messaging.application.models.MessageDto
 import com.example.microservice.messaging.entities.Message

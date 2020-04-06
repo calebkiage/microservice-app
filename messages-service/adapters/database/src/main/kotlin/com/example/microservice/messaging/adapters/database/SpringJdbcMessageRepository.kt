@@ -1,12 +1,11 @@
 package com.example.microservice.messaging.adapters.database
 
-import com.example.microservice.messaging.application.ports.MessageWriter
+import com.example.microservice.messaging.application.ports.store.MessageWriter
 import com.example.microservice.messaging.application.data.PersistentMessage
-import com.example.microservice.messaging.application.ports.MessageReader
-import com.example.microservice.messaging.application.ports.MessageStore
+import com.example.microservice.messaging.application.ports.store.MessageReader
+import com.example.microservice.messaging.application.ports.store.MessageStore
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.support.GeneratedKeyHolder
-import java.sql.ResultSet
 
 class SpringJdbcMessageRepository(
     private val jdbcTemplate: JdbcTemplate
