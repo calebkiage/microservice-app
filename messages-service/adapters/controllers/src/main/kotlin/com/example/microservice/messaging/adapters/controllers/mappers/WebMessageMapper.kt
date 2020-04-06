@@ -8,6 +8,6 @@ import org.mapstruct.Mapper
 
 @Mapper(uses = [EntityFactory::class])
 interface WebMessageMapper : MessageMapper {
-    fun fromMessageDto(message: MessageDto): ExtMessage
-    fun toMessageDto(message: ExtMessage): MessageDto
+    fun messageDtoToExtMessage(message: MessageDto): ExtMessage
+    fun extMessageToMessageDto(message: ExtMessage): MessageDto
 }

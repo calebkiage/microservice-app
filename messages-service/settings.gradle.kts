@@ -4,8 +4,8 @@ includeBuild("../common")
 include(
     "adapters:database",
     "adapters:controllers",
-    "application",
     "config:spring-config",
-    "entities",
-    "drivers:spring"
+    "domain:application",
+    "domain:entities",
+    "drivers:spring-web"
 )

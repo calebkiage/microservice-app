@@ -11,7 +11,7 @@ configure<JavaPluginExtension> {
 }
 
 dependencies {
-  implementation(project(":application"))
+  implementation(project(":domain:application"))
   implementation("com.example.microservice:common")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("org.springframework:spring-jdbc")

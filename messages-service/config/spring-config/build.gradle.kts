@@ -13,8 +13,8 @@ configure<JavaPluginExtension> {
 dependencies {
   implementation(project(":adapters:database"))
   implementation(project(":adapters:controllers"))
-  implementation(project(":application"))
-  implementation(project(":entities"))
+  implementation(project(":domain:application"))
+  implementation(project(":domain:entities"))
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("org.mapstruct:mapstruct")
   implementation("org.springframework:spring-context")

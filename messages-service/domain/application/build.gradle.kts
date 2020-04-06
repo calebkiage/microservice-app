@@ -5,23 +5,25 @@ plugins {
   kotlin("kapt")
 }
 
-group = "com.example.microservice.messages.adapters"
+group = "com.example.microservice.messages.domain"
 
 configure<JavaPluginExtension> {
   sourceCompatibility = JavaVersion.VERSION_11
 }
 
+val mapstructVersion = "1.3.1.Final"
+
 dependencies {
-  implementation(project(":domain:application"))
   implementation(project(":domain:entities"))
   implementation("com.example.microservice:common")
+  implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-  implementation("org.mapstruct:mapstruct")
-  implementation("javax.validation:validation-api")
+  implementation("org.mapstruct:mapstruct:${mapstructVersion}")
 
-  kapt("org.mapstruct:mapstruct-processor")
+  kapt("org.mapstruct:mapstruct-processor:${mapstructVersion}")
 
   testImplementation("org.junit.jupiter:junit-jupiter:5.6.1")
+  testImplementation("io.mockk:mockk:1.9.kotlin12")
 }
 
 tasks.test {
