@@ -1,4 +1,4 @@
-package com.example.microservice.messaging.application.send
+package com.example.microservice.messaging.application.usecases
 
 import com.example.microservice.messaging.application.data.PersistentMessage
 import com.example.microservice.messaging.application.ports.MessageWriter

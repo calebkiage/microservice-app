@@ -5,9 +5,13 @@ import com.example.microservice.messaging.adapters.controllers.mappers.WebMessag
 import com.example.microservice.messaging.adapters.database.MemoryMessageRepository
 import com.example.microservice.messaging.adapters.database.SpringJdbcMessageRepository
 import com.example.microservice.messaging.application.ports.MessageMapper
+import com.example.microservice.messaging.application.ports.MessageReader
+import com.example.microservice.messaging.application.ports.MessageStore
 import com.example.microservice.messaging.application.ports.MessageWriter
 import com.example.microservice.messaging.application.ports.SendUseCaseInputPort
-import com.example.microservice.messaging.application.send.SendUseCase
+import com.example.microservice.messaging.application.ports.ViewUseCaseInputPort
+import com.example.microservice.messaging.application.usecases.SendUseCase
+import com.example.microservice.messaging.application.usecases.ViewUseCase
 import org.mapstruct.factory.Mappers
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Primary
@@ -17,20 +21,14 @@ import org.springframework.jdbc.core.JdbcTemplate
 class BeansConfig {
     @Bean
     @Profile("!dev-solo")
-    fun messageWriter(jdbcTemplate: JdbcTemplate): MessageWriter {
+    fun messageStore(jdbcTemplate: JdbcTemplate): MessageStore {
         return SpringJdbcMessageRepository(jdbcTemplate)
     }
 
     @Bean
     @Profile("dev-solo")
-    fun memoryMessageWriter(): MessageWriter {
+    fun memoryMessageStore(): MessageStore {
         return MemoryMessageRepository()
-    }
-
-    @Bean
-    @Primary
-    fun messageMapper(): MessageMapper {
-        return Mappers.getMapper(WebMessageMapper::class.java)
     }
 
     @Bean
@@ -39,12 +37,21 @@ class BeansConfig {
     }
 
     @Bean
-    fun messagesController(useCase: SendUseCaseInputPort, mapper: WebMessageMapper): MessagesController {
-        return MessagesController(useCase, mapper)
+    fun messagesController(
+        sendUseCase: SendUseCaseInputPort,
+        viewUseCase: ViewUseCaseInputPort,
+        mapper: WebMessageMapper
+    ): MessagesController {
+        return MessagesController(sendUseCase, viewUseCase, mapper)
     }
 
     @Bean
-    fun sendUseCaseInputPort(writer: MessageWriter, mapper: MessageMapper): SendUseCaseInputPort {
+    fun sendUseCase(writer: MessageWriter, mapper: MessageMapper): SendUseCaseInputPort {
         return SendUseCase(writer, mapper)
+    }
+
+    @Bean
+    fun viewUseCase(reader: MessageReader, mapper: MessageMapper): ViewUseCaseInputPort {
+        return ViewUseCase(reader, mapper)
     }
 }
