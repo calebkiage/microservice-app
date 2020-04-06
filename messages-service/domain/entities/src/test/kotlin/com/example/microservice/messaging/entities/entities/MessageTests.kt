@@ -20,7 +20,7 @@ class MessageTests {
     @BeforeEach
     fun testSetup() {
         val clock = Clock.fixed(Instant.parse("2020-04-05T05:57:51.00Z"), ZoneId.systemDefault())
-        this.message = Message("Test message", clock)
+        this.message = Message.builder().content("Test message").clock(clock).build()
     }
 
     @Nested
@@ -30,15 +30,15 @@ class MessageTests {
         fun `should reject a message with blank content`() {
             // Arrange + Act + Assert
             Assertions.assertThrows(IllegalArgumentException::class.java) {
-                Message("")
+                Message.builder().content("").build()
             }
         }
 
-        @ParameterizedTest(name = "should trim start and end spaces [{index}]\n{argumentsWithNames}")
+        @ParameterizedTest(name = "should trim start and end spaces [{index}]\n{arguments}")
         @ValueSource(strings = [" test", "test ", "\n\ntest"])
         fun `should trim start and end spaces`(testString: String) {
             // Arrange + Act
-            val message = Message(testString)
+            val message = Message.builder().content(testString).build()
 
             // Assert
             Assertions.assertEquals("test", message.content)
@@ -47,7 +47,7 @@ class MessageTests {
 
     @Nested
     @DisplayName("when edit")
-    inner class EditMessageTests {
+    inner class CopyWithContentTests {
         @Test
         fun `should update a message's content`() {
             // Arrange
@@ -85,7 +85,7 @@ class MessageTests {
             }
         }
 
-        @ParameterizedTest(name = "should trim start and end spaces [{index}]\n{argumentsWithNames}")
+        @ParameterizedTest(name = "should trim start and end spaces [{index}]\n{arguments}")
         @ValueSource(strings = [" test", "test ", "\n\ntest"])
         fun `should trim start and end spaces`(testString: String) {
             // Arrange

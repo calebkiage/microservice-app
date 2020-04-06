@@ -26,7 +26,7 @@ class SendUseCaseTests {
         this.sendUseCase = SendUseCase(this.messageWriter, this.messageMapper)
 
 
-        every { messageMapper.messageDtoToMessage(any()) }.returns(Message("test"))
+        every { messageMapper.messageDtoToMessage(any()) }.returns(Message.builder().content("test").build())
         every { messageMapper.messageToPersistentMessage(any()) }.returns(PersistentMessage())
         every { messageWriter.save(any()) }.returns(PersistentMessage(id = 1))
     }

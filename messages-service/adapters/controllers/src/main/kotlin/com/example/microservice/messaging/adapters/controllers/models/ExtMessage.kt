@@ -1,11 +1,15 @@
 package com.example.microservice.messaging.adapters.controllers.models
 
+import java.time.Instant
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 
-class ExtMessage(
+data class ExtMessage(
     @get:NotBlank
-    var content: String? = null,
+    val content: String?,
+
     @get:Min(1)
-    var id: Long? = null
+    val id: Long?,
+
+    val sentOn: Instant?
 )

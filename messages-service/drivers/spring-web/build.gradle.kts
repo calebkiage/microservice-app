@@ -36,6 +36,7 @@ dependencies {
   implementation(project(":config:spring-config"))
   implementation(project(":adapters:controllers"))
   implementation("com.example.microservice:common")
+  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.hibernate.validator:hibernate-validator")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("org.springframework.boot:spring-boot-starter-jdbc")

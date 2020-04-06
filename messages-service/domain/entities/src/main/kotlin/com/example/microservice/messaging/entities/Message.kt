@@ -3,21 +3,37 @@ package com.example.microservice.messaging.entities
 import java.time.Clock
 import java.time.Instant
 
-open class Message(var content: String? = null, private var clock: Clock = Clock.systemDefaultZone()) {
-    var id: Long? = null
-    var sentOn: Instant? = null
+open class Message private constructor(
+    var content: String?,
+    var id: Long?,
+    var sentOn: Instant?,
+    private val clock: Clock = Clock.systemDefaultZone()
+) {
+    private constructor() : this(null, null, null)
 
-    init {
-        this.validateContent(content)
-        this.content = content?.let { this.sanitizeMessage(it) }
+    companion object {
+        fun builder(): Builder {
+            return Builder()
+        }
+
+        private fun sanitizeMessage(message: String): String {
+            return message.trim()
+        }
+
+        @Throws(IllegalArgumentException::class)
+        private fun validateContent(content: String?): Boolean {
+            if (content.isNullOrBlank()) {
+                throw IllegalArgumentException("The content cannot be null or blank")
+            }
+
+            return true
+        }
     }
 
     @Throws(IllegalArgumentException::class)
     fun editContent(content: String) {
-        this.validateContent(content)
-
-        // Naive implementation
-        this.content = this.sanitizeMessage(content)
+        validateContent(content)
+        this.content = sanitizeMessage(content)
     }
 
     @Throws(IllegalStateException::class)
@@ -30,16 +46,42 @@ open class Message(var content: String? = null, private var clock: Clock = Clock
         this.sentOn = Instant.now(this.clock)
     }
 
-    @Throws(IllegalArgumentException::class)
-    private fun validateContent(content: String?): Boolean {
-        if (content.isNullOrBlank()) {
-            throw IllegalArgumentException("The content cannot be null or blank")
+    open class Builder constructor() {
+        private var content: String? = null
+        private var id: Long? = null
+        private var sentOn: Instant? = null
+        private var clock: Clock = Clock.systemDefaultZone()
+
+        constructor(message: Message) : this() {
+            this.content = message.content
+            this.id = message.id
+            this.sentOn = message.sentOn
+            this.clock = message.clock
         }
 
-        return true
-    }
+        fun content(value: String?): Builder {
+            validateContent(value)
+            this.content = value?.let { sanitizeMessage(it) }
+            return this
+        }
 
-    private fun sanitizeMessage(message: String): String {
-        return message.trim()
+        fun id(value: Long?): Builder {
+            this.id = value
+            return this
+        }
+
+        fun sentOn(value: Instant?): Builder {
+            this.sentOn = value
+            return this
+        }
+
+        fun clock(value: Clock): Builder {
+            this.clock = value
+            return this
+        }
+
+        fun build(): Message {
+            return Message(this.content, this.id, this.sentOn, this.clock)
+        }
     }
 }

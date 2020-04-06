@@ -1,6 +1,6 @@
 package com.example.microservice.messaging.adapters.controllers
 
-import com.example.microservice.messaging.adapters.controllers.mappers.WebMessageMapper
+import com.example.microservice.messaging.adapters.controllers.mappers.ManualWebMessageMapper
 import com.example.microservice.messaging.adapters.controllers.models.ExtMessage
 import com.example.microservice.messaging.application.ports.send.SendUseCaseInputPort
 import com.example.microservice.messaging.application.ports.view.ViewUseCaseInputPort
@@ -8,7 +8,7 @@ import com.example.microservice.messaging.application.ports.view.ViewUseCaseInpu
 open class MessagesController(
     private val sendUseCase: SendUseCaseInputPort,
     private val viewUseCase: ViewUseCaseInputPort,
-    private val messageMapper: WebMessageMapper
+    private val messageMapper: ManualWebMessageMapper
 ) {
     open fun sendMessage(message: ExtMessage): ExtMessage {
         val dto = this.messageMapper.extMessageToMessageDto(message)

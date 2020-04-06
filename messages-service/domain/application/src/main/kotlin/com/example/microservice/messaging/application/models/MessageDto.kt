@@ -1,3 +1,5 @@
 package com.example.microservice.messaging.application.models
 
-open class MessageDto(open var content: String? = null, open var id: Long? = null)
+import java.time.Instant
+
+class MessageDto(var content: String? = null, var id: Long? = null, var sentOn: Instant? = null)

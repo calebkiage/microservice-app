@@ -16,7 +16,6 @@ dependencies {
   implementation(project(":domain:application"))
   implementation(project(":domain:entities"))
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-  implementation("org.mapstruct:mapstruct")
   implementation("org.springframework:spring-context")
   implementation("org.springframework:spring-jdbc")
 }

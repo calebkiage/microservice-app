@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   kotlin("jvm")
-  kotlin("kapt")
 }
 
 group = "com.example.microservice.messages.adapters"
@@ -16,10 +15,7 @@ dependencies {
   implementation(project(":domain:entities"))
   implementation("com.example.microservice:common")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-  implementation("org.mapstruct:mapstruct")
   implementation("javax.validation:validation-api")
-
-  kapt("org.mapstruct:mapstruct-processor")
 
   testImplementation("org.junit.jupiter:junit-jupiter:5.6.1")
 }

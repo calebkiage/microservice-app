@@ -26,6 +26,8 @@ class SpringJdbcMessageRepository(
     }
 
     override fun findAll(): List<PersistentMessage> {
-        return this.jdbcTemplate.query("select * from messages") { rs, _ -> PersistentMessage(rs.getString("content"), rs.getLong("id"))}
+        return this.jdbcTemplate.query("select * from messages") {
+            rs, _ -> PersistentMessage(rs.getString("content"), rs.getLong("id"))
+        }
     }
 }
