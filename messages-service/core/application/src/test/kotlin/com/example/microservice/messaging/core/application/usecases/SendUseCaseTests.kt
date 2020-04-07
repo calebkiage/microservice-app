@@ -4,6 +4,7 @@ import com.example.microservice.messaging.core.application.data.PersistentMessag
 import com.example.microservice.messaging.core.application.ports.store.MessageWriter
 import com.example.microservice.messaging.core.application.mappers.MessageMapper
 import com.example.microservice.messaging.core.application.models.MessageDto
+import com.example.microservice.messaging.core.application.ports.store.MessageAuditor
 import com.example.microservice.messaging.core.domain.Message
 import io.mockk.every
 import io.mockk.mockk
@@ -15,19 +16,23 @@ import org.junit.jupiter.api.Test
 
 @DisplayName("The send use case")
 class SendUseCaseTests {
+    private lateinit var messageAuditor: MessageAuditor
     private lateinit var messageMapper: MessageMapper
     private lateinit var messageWriter: MessageWriter
     private lateinit var sendUseCase: SendUseCase
 
     @BeforeEach
     fun testSetup() {
+        this.messageAuditor = mockk()
         this.messageMapper = mockk()
         this.messageWriter = mockk()
-        this.sendUseCase = SendUseCase(this.messageWriter, this.messageMapper)
+        this.sendUseCase = SendUseCase(this.messageAuditor, this.messageWriter, this.messageMapper)
 
 
+        every { messageAuditor.recordChange(any(), any(), any()) }.answers {}
         every { messageMapper.messageDtoToMessage(any()) }.returns(Message.builder().content("test").build())
         every { messageMapper.messageToPersistentMessage(any()) }.returns(PersistentMessage())
+        every { messageMapper.persistentMessageToMessageDto(any()) }.returns(MessageDto())
         every { messageWriter.save(any()) }.returns(PersistentMessage(id = 1))
     }
 

@@ -1,10 +1,9 @@
 package com.example.microservice.messaging.core.application.usecases
 
-import com.example.microservice.messaging.core.application.ports.store.MessageWriter
 import com.example.microservice.messaging.core.application.mappers.MessageMapper
 import com.example.microservice.messaging.core.application.models.MessageDto
-import com.example.microservice.messaging.core.application.ports.send.SendUseCaseInputPort
 import com.example.microservice.messaging.core.application.ports.store.MessageAuditor
+import com.example.microservice.messaging.core.application.ports.store.MessageWriter
 
 class SendUseCase(
     private val messageAuditor: MessageAuditor,

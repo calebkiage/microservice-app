@@ -13,42 +13,29 @@ The code follows the [clean architecture style](https://blog.cleancoder.com/uncl
 
 Below are the layers from outermost to the innermost
 
-### Config
-This layer glues everything together. It's like a Main component.
-
 ### Drivers & Frameworks
 This layer doesn't have any code
 
 ### Interface Adapters
-#### Controllers
-Takes data from the code in outer layers and runs it through the use cases. Depends on:
-
-1. `:application`
-2. `:entities`
+#### Gateways
+##### Data
+Implements the storage ports e.g. MessageWriter. Depends on:
+1. `:core:application`
 
 #### Presenters
-##### Spring Config
-Use Spring IoC to register component instances. Depends on:
-1. `:adapters:database`
-2. `:adapters:controllers`
-3. `:application`
-4. `:entities`
+##### Spring Web
+This layer glues everything together. It contains the `Main` component that sets up the IoC container.
+It's a spring boot app that depends on:
+1. `:adapters:gateways:database`
+1. `:core:application`
+2. `:core:domain`
 
-##### Spring
-A spring boot app that depends on:
-1. `:config:spring-config`
-2. `:adapters:controllers`
-
-#### Gateways
-##### Database
-Implementation of the storage ports from `:application`. Depends on:
-1. `:application`
-
+#### Core
 ### Application Business Rules
 This layer contains business rules/use cases. Depends on:
-1. `:entities`
+1. `:core:entities`
 
-### Enterprise Business Rules
+### Enterprise Business Rules (domain)
 Contains enterprise business rules. This is the inner-most layer and has no dependencies.
 
 ### Prerequisites
