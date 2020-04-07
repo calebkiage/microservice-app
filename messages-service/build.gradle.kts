@@ -26,6 +26,7 @@ subprojects {
     mavenCentral()
   }
 
+  val javersVersion by extra { "5.8.12" }
   val mapStructVersion by extra { "1.3.1.Final" }
 
   the<DependencyManagementExtension>().apply {
@@ -35,6 +36,10 @@ subprojects {
     }
 
     dependencies {
+      dependencySet(mapOf(Pair("group", "org.javers"), Pair("version", javersVersion))) {
+        entry("javers-core")
+      }
+
       dependencySet(mapOf(Pair("group", "org.mapstruct"), Pair("version", mapStructVersion))) {
         entry("mapstruct")
         entry("mapstruct-processor")

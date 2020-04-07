@@ -16,18 +16,8 @@ Below are the layers from outermost to the innermost
 ### Config
 This layer glues everything together. It's like a Main component.
 
-#### Spring Config
-Use Spring IoC to register component instances. Depends on:
-1. `:adapters:database`
-2. `:adapters:controllers`
-3. `:application`
-4. `:entities`
-
 ### Drivers & Frameworks
-#### Spring
-A spring boot app that depends on:
-1. `:config:spring-config`
-2. `:adapters:controllers`
+This layer doesn't have any code
 
 ### Interface Adapters
 #### Controllers
@@ -36,7 +26,21 @@ Takes data from the code in outer layers and runs it through the use cases. Depe
 1. `:application`
 2. `:entities`
 
-#### Database
+#### Presenters
+##### Spring Config
+Use Spring IoC to register component instances. Depends on:
+1. `:adapters:database`
+2. `:adapters:controllers`
+3. `:application`
+4. `:entities`
+
+##### Spring
+A spring boot app that depends on:
+1. `:config:spring-config`
+2. `:adapters:controllers`
+
+#### Gateways
+##### Database
 Implementation of the storage ports from `:application`. Depends on:
 1. `:application`
 
