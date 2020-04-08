@@ -9,10 +9,14 @@ import com.example.microservice.messaging.core.domain.Message
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import java.time.Clock
+import java.time.Instant
+import java.time.ZoneId
 
 @DisplayName("The send use case")
 class SendUseCaseTests {
@@ -20,6 +24,7 @@ class SendUseCaseTests {
     private lateinit var messageMapper: MessageMapper
     private lateinit var messageWriter: MessageWriter
     private lateinit var sendUseCase: SendUseCase
+    private val frozenClock = Clock.fixed(Instant.parse("2020-04-05T05:57:51.00Z"), ZoneId.systemDefault())
 
     @BeforeEach
     fun testSetup() {
@@ -40,18 +45,18 @@ class SendUseCaseTests {
     @DisplayName("when sendMessage")
     inner class SendMessageTests {
         @Test
-        fun `should call the message entity's send function`() {
+        fun `should set the message entity's sentOn date`() {
             // Arrange
             val messageToSend = MessageDto("")
-            val message: Message = mockk()
-            every { message.send() }.answers { }
+            val message: Message = Message.builder().content("test").clock(frozenClock).build()
             every { messageMapper.messageDtoToMessage(any()) }.returns(message)
 
             // Act
             sendUseCase.sendMessage(messageToSend)
 
             // Assert
-            verify(exactly = 1) { message.send() }
+            val expected = Instant.parse("2020-04-05T05:57:51.00Z")
+            Assertions.assertEquals(expected.toEpochMilli(), message.sentOn?.toEpochMilli())
         }
 
         @Test
@@ -59,8 +64,7 @@ class SendUseCaseTests {
             // Arrange
             val messageToSend = MessageDto("")
             val dbObject = PersistentMessage()
-            val message: Message = mockk()
-            every { message.send() }.answers { }
+            val message: Message = Message.builder().content("test").build()
             every { messageMapper.messageDtoToMessage(any()) }.returns(message)
             every { messageMapper.messageToPersistentMessage(any()) }.returns(dbObject)
 
