@@ -35,7 +35,6 @@ dependencies {
 
   implementation(project(":adapters:gateways:data"))
   implementation(project(":core:application"))
-  implementation(project(":core:domain"))
   implementation("com.example.microservice:common")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.hibernate.validator:hibernate-validator")

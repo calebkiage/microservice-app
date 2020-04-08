@@ -23,7 +23,7 @@ class SendUseCaseTests {
     private lateinit var messageAuditor: MessageAuditor
     private lateinit var messageMapper: MessageMapper
     private lateinit var messageWriter: MessageWriter
-    private lateinit var sendUseCase: SendUseCase
+    private lateinit var sendUseCase: SendUseCaseImpl
     private val frozenClock = Clock.fixed(Instant.parse("2020-04-05T05:57:51.00Z"), ZoneId.systemDefault())
 
     @BeforeEach
@@ -31,7 +31,7 @@ class SendUseCaseTests {
         this.messageAuditor = mockk()
         this.messageMapper = mockk()
         this.messageWriter = mockk()
-        this.sendUseCase = SendUseCase(this.messageAuditor, this.messageWriter, this.messageMapper)
+        this.sendUseCase = SendUseCaseImpl(this.messageAuditor, this.messageWriter, this.messageMapper)
 
 
         every { messageAuditor.recordChange(any(), any(), any()) }.answers {}

@@ -5,12 +5,14 @@ import com.example.microservice.messaging.adapters.gateways.data.jdbc.SpringJdbc
 import com.example.microservice.messaging.adapters.gateways.data.mock.MemoryMessageRepository
 import com.example.microservice.messaging.core.application.mappers.ManualMessageMapper
 import com.example.microservice.messaging.core.application.mappers.MessageMapper
+import com.example.microservice.messaging.core.application.ports.send.SendUseCase
 import com.example.microservice.messaging.core.application.ports.store.MessageAuditor
 import com.example.microservice.messaging.core.application.ports.store.MessageReader
 import com.example.microservice.messaging.core.application.ports.store.MessageStore
 import com.example.microservice.messaging.core.application.ports.store.MessageWriter
-import com.example.microservice.messaging.core.application.usecases.SendUseCase
-import com.example.microservice.messaging.core.application.usecases.ViewUseCase
+import com.example.microservice.messaging.core.application.ports.view.ViewUseCase
+import com.example.microservice.messaging.core.application.usecases.SendUseCaseImpl
+import com.example.microservice.messaging.core.application.usecases.ViewUseCaseImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Profile
 import org.springframework.jdbc.core.JdbcTemplate
@@ -40,11 +42,11 @@ class BeansConfig {
 
     @Bean
     fun sendUseCase(auditor: MessageAuditor, writer: MessageWriter, mapper: MessageMapper): SendUseCase {
-        return SendUseCase(auditor, writer, mapper)
+        return SendUseCaseImpl(auditor, writer, mapper)
     }
 
     @Bean
     fun viewUseCase(reader: MessageReader, mapper: MessageMapper): ViewUseCase {
-        return ViewUseCase(reader, mapper)
+        return ViewUseCaseImpl(reader, mapper)
     }
 }

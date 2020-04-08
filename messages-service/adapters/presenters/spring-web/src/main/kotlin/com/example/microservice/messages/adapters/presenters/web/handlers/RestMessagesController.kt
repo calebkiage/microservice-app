@@ -2,8 +2,8 @@ package com.example.microservice.messages.adapters.presenters.web.handlers
 
 import com.example.microservice.messages.adapters.presenters.web.models.GetMessagesParameters
 import com.example.microservice.messaging.core.application.models.MessageDto
-import com.example.microservice.messaging.core.application.usecases.SendUseCase
-import com.example.microservice.messaging.core.application.usecases.ViewUseCase
+import com.example.microservice.messaging.core.application.ports.send.SendUseCase
+import com.example.microservice.messaging.core.application.ports.view.ViewUseCase
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
