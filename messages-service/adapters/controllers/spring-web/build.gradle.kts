@@ -7,10 +7,6 @@ plugins {
 
 group = "com.example.microservice.messages.adapters.presenters"
 
-application {
-  mainClassName = "com.example.microservice.messages.adapters.presenters.web.MessagesServiceApplicationKt"
-}
-
 val developmentOnly: Configuration by configurations.creating
 
 configurations {
