@@ -5,12 +5,14 @@ import com.example.microservice.messaging.adapters.gateways.data.jdbc.SpringJdbc
 import com.example.microservice.messaging.adapters.gateways.data.mock.MemoryMessageRepository
 import com.example.microservice.messaging.core.application.mappers.ManualMessageMapper
 import com.example.microservice.messaging.core.application.mappers.MessageMapper
-import com.example.microservice.messaging.core.application.ports.send.SendUseCase
+import com.example.microservice.messaging.core.application.usecases.SendUseCase
 import com.example.microservice.messaging.core.application.ports.store.MessageAuditor
 import com.example.microservice.messaging.core.application.ports.store.MessageReader
 import com.example.microservice.messaging.core.application.ports.store.MessageStore
 import com.example.microservice.messaging.core.application.ports.store.MessageWriter
-import com.example.microservice.messaging.core.application.ports.view.ViewUseCase
+import com.example.microservice.messaging.core.application.usecases.EditUseCase
+import com.example.microservice.messaging.core.application.usecases.EditUseCaseImpl
+import com.example.microservice.messaging.core.application.usecases.ViewUseCase
 import com.example.microservice.messaging.core.application.usecases.SendUseCaseImpl
 import com.example.microservice.messaging.core.application.usecases.ViewUseCaseImpl
 import org.springframework.context.annotation.Bean
@@ -38,6 +40,11 @@ class BeansConfig {
     @Bean
     fun messageAuditor(): MessageAuditor {
         return JaversAuditor.instance()
+    }
+
+    @Bean
+    fun editUseCase(auditor: MessageAuditor, reader: MessageReader, writer: MessageWriter, mapper: MessageMapper): EditUseCase {
+        return EditUseCaseImpl(auditor, reader, writer, mapper)
     }
 
     @Bean

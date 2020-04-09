@@ -13,10 +13,10 @@ class SpringJdbcMessageRepository(
 
         val keyHolder = GeneratedKeyHolder()
         this.jdbcTemplate.update({
-            it.prepareStatement(insertSql, arrayOf("id"))
+            it.prepareStatement(insertSql)
                 .apply {
                     setString(1, persistentMessage.content)
-                    setObject(1, persistentMessage.sentOn)
+                    setObject(2, persistentMessage.sentOn)
                 }
         }, keyHolder)
 
@@ -24,8 +24,13 @@ class SpringJdbcMessageRepository(
     }
 
     override fun findAll(): List<PersistentMessage> {
-        return this.jdbcTemplate.query("select * from messages") {
-            rs, _ ->
+        return this.jdbcTemplate.query("select * from messages") { rs, _ ->
+            PersistentMessage(rs.getString("content"), rs.getLong("id"))
+        }
+    }
+
+    override fun findById(id: Long): PersistentMessage? {
+        return this.jdbcTemplate.queryForObject("select * from messages where id = ?") { rs, _ ->
             PersistentMessage(rs.getString("content"), rs.getLong("id"))
         }
     }

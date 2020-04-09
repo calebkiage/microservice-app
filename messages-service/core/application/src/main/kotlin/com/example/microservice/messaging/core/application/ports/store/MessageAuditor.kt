@@ -6,4 +6,6 @@ interface MessageAuditor {
     fun recordChange(author: String, new: MessageDto, old: MessageDto)
 
     fun recordChange(author: String, new: MessageDto)
+
+    fun viewHistory(): List<Any>
 }

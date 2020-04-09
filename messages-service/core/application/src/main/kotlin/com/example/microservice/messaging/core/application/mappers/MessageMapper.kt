@@ -9,4 +9,5 @@ interface MessageMapper {
     fun messageToPersistentMessage(message: Message): PersistentMessage
     fun messageToMessageDto(message: Message): MessageDto
     fun persistentMessageToMessageDto(message: PersistentMessage): MessageDto
+    fun persistentMessageToMessage(message: PersistentMessage): Message
 }

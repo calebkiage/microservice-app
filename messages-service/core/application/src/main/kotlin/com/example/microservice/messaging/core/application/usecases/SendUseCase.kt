@@ -1,4 +1,4 @@
-package com.example.microservice.messaging.core.application.ports.send
+package com.example.microservice.messaging.core.application.usecases
 
 import com.example.microservice.messaging.core.application.models.MessageDto
 

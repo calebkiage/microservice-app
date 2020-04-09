@@ -24,4 +24,12 @@ class ManualMessageMapper : MessageMapper {
     override fun persistentMessageToMessageDto(message: PersistentMessage): MessageDto {
         return MessageDto(message.content, message.id, message.sentOn)
     }
+
+    override fun persistentMessageToMessage(message: PersistentMessage): Message {
+        return Message.builder()
+            .content(message.content)
+            .id(message.id)
+            .sentOn(message.sentOn)
+            .build()
+    }
 }

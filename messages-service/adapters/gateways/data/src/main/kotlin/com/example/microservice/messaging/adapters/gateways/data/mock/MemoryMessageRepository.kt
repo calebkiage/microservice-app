@@ -10,15 +10,18 @@ class MemoryMessageRepository : MessageStore {
     private val id = AtomicLong(0)
 
     override fun save(persistentMessage: PersistentMessage): PersistentMessage {
-        // Generate id
-        val id = this.id.incrementAndGet()
-        persistentMessage.id = id
+        val id: Long = persistentMessage.id ?: this.id.incrementAndGet()
 
+        persistentMessage.id = id
         this.store[id] = persistentMessage
         return persistentMessage
     }
 
     override fun findAll(): List<PersistentMessage> {
         return this.store.values.toList()
+    }
+
+    override fun findById(id: Long): PersistentMessage? {
+        return this.store[id]
     }
 }

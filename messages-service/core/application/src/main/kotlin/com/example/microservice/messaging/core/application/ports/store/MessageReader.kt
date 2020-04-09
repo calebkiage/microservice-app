@@ -4,4 +4,6 @@ import com.example.microservice.messaging.core.application.data.PersistentMessag
 
 interface MessageReader {
     fun findAll(): List<PersistentMessage>
+
+    fun findById(id: Long): PersistentMessage?
 }
