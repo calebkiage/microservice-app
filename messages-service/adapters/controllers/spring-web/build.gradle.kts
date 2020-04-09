@@ -19,10 +19,6 @@ configurations {
   }
 }
 
-configure<JavaPluginExtension> {
-  sourceCompatibility = JavaVersion.VERSION_11
-}
-
 dependencies {
   developmentOnly("org.springframework.boot:spring-boot-devtools")
 
