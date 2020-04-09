@@ -18,31 +18,31 @@ This layer doesn't have any code
 
 ### Interface Adapters
 #### Gateways
-##### Data
+##### Data (adapters:gateways:data)
 Implements the storage ports e.g. MessageWriter. Depends on:
 1. `:core:application`
 
-#### Presenters
-##### Spring Web
-This layer glues everything together. It contains the `Main` component that sets up the IoC container.
-It's a spring boot app that depends on:
+#### Controllers
+This layer contains MVC controllers. It also contains the `Main` component that sets up the IoC container. See BeansConfig
+
+##### Spring Web (adapters:controllers:spring-web)
+This is a spring boot web app that depends on:
 1. `:adapters:gateways:database`
-1. `:core:application`
-2. `:core:domain`
+2. `:core:application`
 
 #### Core
-### Application Business Rules
+##### Application Business Rules (core:application)
 This layer contains business rules/use cases. Depends on:
-1. `:core:entities`
+1. `:core:domain`
 
-### Enterprise Business Rules (domain)
+##### Enterprise Business Rules (core:domain)
 Contains enterprise business rules. This is the inner-most layer and has no dependencies.
 
 ### Prerequisites
 
 1. Docker
 2. Docker Compose
-3. JDK 8 
+3. JDK 8+
 
 ## Running the tests
 

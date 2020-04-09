@@ -2,8 +2,8 @@ rootProject.name = "messages-service"
 
 includeBuild("../common")
 include(
-    "adapters:gateways:data",
-    "adapters:presenters:spring-web",
-    "core:application",
-    "core:domain"
+    ":adapters:controllers:spring-web",
+    ":adapters:gateways:data",
+    ":core:application",
+    ":core:domain"
 )

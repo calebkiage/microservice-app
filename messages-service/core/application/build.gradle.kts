@@ -1,15 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-plugins {
-  kotlin("jvm")
-  kotlin("kapt")
-}
-
 group = "com.example.microservice.messages.core"
-
-configure<JavaPluginExtension> {
-  sourceCompatibility = JavaVersion.VERSION_11
-}
 
 dependencies {
   implementation(project(":core:domain"))
@@ -17,20 +6,5 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-  testImplementation("org.junit.jupiter:junit-jupiter:5.6.1")
   testImplementation("io.mockk:mockk:1.9.kotlin12")
-}
-
-tasks.test {
-  useJUnitPlatform()
-  testLogging {
-    events("passed", "skipped", "failed")
-  }
-}
-
-tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "1.8"
-  }
 }

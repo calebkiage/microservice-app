@@ -1,6 +1,7 @@
 package com.example.microservice.messages.adapters.presenters.web.handlers
 
 import com.example.microservice.messages.adapters.presenters.web.models.GetMessagesParameters
+import com.example.microservice.messages.adapters.presenters.web.models.ValidatedMessageDto
 import com.example.microservice.messaging.core.application.models.MessageDto
 import com.example.microservice.messaging.core.application.ports.send.SendUseCase
 import com.example.microservice.messaging.core.application.ports.view.ViewUseCase
@@ -25,7 +26,7 @@ class RestMessagesController(
     }
 
     @PostMapping("send/{userId}")
-    fun sendMessage(@PathVariable userId: String, @Validated @RequestBody message: MessageDto): MessageDto {
+    fun sendMessage(@PathVariable userId: String, @Validated @RequestBody message: ValidatedMessageDto): MessageDto {
         return this.sendUseCase.sendMessage(message)
     }
 }

@@ -52,7 +52,9 @@ dependencies {
 
 jib {
   container {
+    creationTime = "USE_CURRENT_TIMESTAMP"
     labels = mapOf(Pair("MAINTAINER", "Caleb Kiage <caleb.kiage@gmail.com>"))
+    jvmFlags = emptyList()
     ports = listOf("9000")
   }
   to {

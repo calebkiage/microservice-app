@@ -1,10 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-  application
   id("com.google.cloud.tools.jib")
+  id("org.springframework.boot")
 
-  kotlin("jvm")
   kotlin("plugin.spring")
 }
 
@@ -14,7 +11,7 @@ application {
   mainClassName = "com.example.microservice.messages.adapters.presenters.web.MessagesServiceApplicationKt"
 }
 
-val developmentOnly by configurations.creating
+val developmentOnly: Configuration by configurations.creating
 
 configurations {
   implementation {
@@ -53,16 +50,14 @@ dependencies {
   }
 }
 
-tasks.test {
-  useJUnitPlatform()
-  testLogging {
-    events("passed", "skipped", "failed")
+jib {
+  container {
+    creationTime = "USE_CURRENT_TIMESTAMP"
+    labels = mapOf(Pair("MAINTAINER", "iCube"))
+    jvmFlags = emptyList()
+    ports = listOf("9100")
   }
-}
-
-tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "1.8"
+  to {
+    image = "iandm/inm-backend-bootstrap-web"
   }
 }
