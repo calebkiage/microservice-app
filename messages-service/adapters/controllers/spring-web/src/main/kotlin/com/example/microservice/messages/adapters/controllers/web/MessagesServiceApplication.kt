@@ -1,4 +1,4 @@
-package com.example.microservice.messages.adapters.presenters.web
+package com.example.microservice.messages.adapters.controllers.web
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

@@ -1,4 +1,4 @@
-package com.example.microservice.messages.adapters.presenters.web.config
+package com.example.microservice.messages.adapters.controllers.web.config
 
 import com.example.microservice.messaging.adapters.gateways.data.audit.JaversAuditor
 import com.example.microservice.messaging.adapters.gateways.data.jdbc.SpringJdbcMessageRepository

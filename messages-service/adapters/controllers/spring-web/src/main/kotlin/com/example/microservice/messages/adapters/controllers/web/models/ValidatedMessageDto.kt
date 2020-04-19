@@ -1,4 +1,4 @@
-package com.example.microservice.messages.adapters.presenters.web.models
+package com.example.microservice.messages.adapters.controllers.web.models
 
 import com.example.microservice.messaging.core.application.models.MessageDto
 import java.time.Instant

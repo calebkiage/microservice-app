@@ -5,7 +5,7 @@ plugins {
   kotlin("plugin.spring")
 }
 
-group = "com.example.microservice.messages.adapters.presenters"
+group = "com.example.microservice.messages.adapters.controllers"
 
 val developmentOnly: Configuration by configurations.creating
 
@@ -45,11 +45,11 @@ dependencies {
 jib {
   container {
     creationTime = "USE_CURRENT_TIMESTAMP"
-    labels = mapOf(Pair("MAINTAINER", "iCube"))
+    labels = mapOf(Pair("MAINTAINER", "Caleb Kiage <caleb.kiage@gmail.com"))
     jvmFlags = emptyList()
     ports = listOf("9100")
   }
   to {
-    image = "iandm/inm-backend-bootstrap-web"
+    image = "calebkiage/microservice-messages-service"
   }
 }

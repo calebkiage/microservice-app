@@ -1,7 +1,7 @@
-package com.example.microservice.messages.adapters.presenters.web.handlers
+package com.example.microservice.messages.adapters.controllers.web.handlers
 
-import com.example.microservice.messages.adapters.presenters.web.models.GetMessagesParameters
-import com.example.microservice.messages.adapters.presenters.web.models.ValidatedMessageDto
+import com.example.microservice.messages.adapters.controllers.web.models.GetMessagesParameters
+import com.example.microservice.messages.adapters.controllers.web.models.ValidatedMessageDto
 import com.example.microservice.messaging.core.application.models.MessageDto
 import com.example.microservice.messaging.core.application.usecases.SendUseCase
 import com.example.microservice.messaging.core.application.ports.store.MessageAuditor
