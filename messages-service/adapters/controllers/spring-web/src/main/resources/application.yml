@@ -8,6 +8,10 @@ server:
   port: 9100
 
 spring:
+  cloud:
+    consul:
+      discovery:
+        instance-id: ${spring.application.name}:${spring.profiles.active}:${server.port}:${random.value}
   kafka:
     client-id: messages-service
     consumer:

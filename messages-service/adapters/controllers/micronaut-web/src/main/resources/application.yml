@@ -1,0 +1,9 @@
+micronaut:
+  application:
+    name: messages
+    instance:
+      id: ${random.shortuuid}
+
+  router:
+    versioning:
+      enabled: true
