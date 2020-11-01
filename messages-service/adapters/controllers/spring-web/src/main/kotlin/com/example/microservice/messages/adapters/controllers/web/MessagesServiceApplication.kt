@@ -7,5 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 class MessagesServiceApplication
 
 fun main(args: Array<String>) {
-    SpringApplication.run(arrayOf(MessagesServiceApplication::class.java), args)
+    val app = SpringApplication.run(arrayOf(MessagesServiceApplication::class.java), args)
+    val test = 2
 }

@@ -1,34 +1,28 @@
 plugins {
-  id("com.google.cloud.tools.jib")
-  id("org.springframework.boot")
+  id("io.spring.dependency-management") version "1.0.10.RELEASE"
+  id("org.springframework.boot") version "2.4.0-RC1"
 
+  kotlin("jvm")
   kotlin("plugin.spring")
 }
 
 group = "com.example.microservice.messages.adapters.controllers"
 
-val developmentOnly: Configuration by configurations.creating
+extra["springCloudVersion"] = "2020.0.0-SNAPSHOT"
 
-configurations {
-  implementation {
-    exclude("org.springframework.cloud", "spring-cloud-starter-netflix-ribbon")
-  }
-
-  runtimeClasspath {
-    extendsFrom(developmentOnly)
+dependencyManagement {
+  imports {
+    mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
   }
 }
 
 dependencies {
-  developmentOnly("org.springframework.boot:spring-boot-devtools")
-
   implementation(project(":adapters:gateways:data"))
   implementation(project(":core:application"))
   implementation("com.example.microservice:common")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.hibernate.validator:hibernate-validator")
-  implementation("org.javers:javers-core")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+  implementation("org.javers:javers-core:5.13.2")
   implementation("org.springframework.boot:spring-boot-starter-jdbc")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
@@ -39,17 +33,5 @@ dependencies {
 
   testImplementation("org.springframework.boot:spring-boot-starter-test") {
     exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-  }
-}
-
-jib {
-  container {
-    creationTime = "USE_CURRENT_TIMESTAMP"
-    labels = mapOf(Pair("MAINTAINER", "Caleb Kiage <caleb.kiage@gmail.com"))
-    jvmFlags = emptyList()
-    ports = listOf("9100")
-  }
-  to {
-    image = "calebkiage/microservice-messages-service"
   }
 }

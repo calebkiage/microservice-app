@@ -1,6 +1,6 @@
 plugins {
   id("io.gitlab.arturbosch.detekt") version "1.7.3"
-  kotlin("jvm") version "1.3.61"
+  kotlin("jvm") version "1.4.10"
 }
 
 group = "com.example.microservice"
@@ -12,12 +12,11 @@ repositories {
 }
 
 dependencies {
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.7.3")
 }
 
 tasks.withType<Wrapper> {
   distributionType = Wrapper.DistributionType.BIN
-  gradleVersion = "6.3"
+  gradleVersion = "6.7"
 }
 
