@@ -1,16 +1,14 @@
-import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("com.google.cloud.tools.jib") version "2.1.0"
   id("io.gitlab.arturbosch.detekt") version "1.7.3"
-  id("io.spring.dependency-management") version "1.0.9.RELEASE"
-  id("org.springframework.boot") version "2.2.5.RELEASE"
-  kotlin("jvm") version "1.3.61"
-  kotlin("plugin.spring") version "1.3.61"
+  id("io.spring.dependency-management") version "1.0.10.RELEASE"
+  id("org.springframework.boot") version "2.4.0-RC1"
+  kotlin("jvm") version "1.4.10"
+  kotlin("plugin.spring") version "1.4.10"
 }
 
-extra["springCloudVersion"] = "Hoxton.SR3"
+extra["springCloudVersion"] = "2020.0.0-SNAPSHOT"
 
 group = "com.example.microservice"
 version = "0.0.1-SNAPSHOT"
@@ -18,15 +16,13 @@ version = "0.0.1-SNAPSHOT"
 repositories {
   jcenter()
   mavenCentral()
+  maven { url = uri("https://repo.spring.io/milestone") }
+  maven { url = uri("https://repo.spring.io/snapshot") }
 }
 
-configurations {
-  implementation {
-    exclude("org.springframework.cloud", "spring-cloud-starter-netflix-ribbon")
-  }
-}
+val javaVersion by extra { JavaVersion.VERSION_11 }
 
-the<DependencyManagementExtension>().apply {
+dependencyManagement {
   imports {
     mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
   }
@@ -50,22 +46,10 @@ dependencies {
   }
 }
 
-jib {
-  container {
-    creationTime = "USE_CURRENT_TIMESTAMP"
-    labels = mapOf(Pair("MAINTAINER", "Caleb Kiage <caleb.kiage@gmail.com>"))
-    jvmFlags = emptyList()
-    ports = listOf("9000")
-  }
-  to {
-    image = "calebkiage/microservice-book-service"
-  }
-}
-
 tasks.withType<KotlinCompile> {
   kotlinOptions {
     freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "1.8"
+    jvmTarget = "$javaVersion"
   }
 }
 
@@ -75,5 +59,5 @@ tasks.withType<Test> {
 
 tasks.withType<Wrapper> {
   distributionType = Wrapper.DistributionType.BIN
-  gradleVersion = "6.3"
+  gradleVersion = "6.7"
 }

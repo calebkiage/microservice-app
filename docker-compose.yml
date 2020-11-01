@@ -1,7 +1,7 @@
 version: "3"
 services:
   auth:
-    image: jboss/keycloak:9.0.2
+    image: jboss/keycloak:11.0.2
     environment:
       - DB_ADDR=db
       - DB_USER=user
@@ -15,7 +15,6 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - "./auth-server/configuration/standalone.xml:/opt/jboss/keycloak/standalone/configuration/standalone.xml"
       - "./auth-server/themes/custom-theme:/opt/jboss/keycloak/themes/custom-theme"
     depends_on:
       - db
