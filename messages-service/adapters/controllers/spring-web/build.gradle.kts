@@ -1,6 +1,6 @@
 plugins {
   id("io.spring.dependency-management") version "1.0.10.RELEASE"
-  id("org.springframework.boot") version "2.4.0-RC1"
+  id("org.springframework.boot") version "2.4.1"
 
   kotlin("jvm")
   kotlin("plugin.spring")
@@ -8,7 +8,7 @@ plugins {
 
 group = "com.example.microservice.messages.adapters.controllers"
 
-extra["springCloudVersion"] = "2020.0.0-SNAPSHOT"
+extra["springCloudVersion"] = "2020.0.0"
 
 dependencyManagement {
   imports {

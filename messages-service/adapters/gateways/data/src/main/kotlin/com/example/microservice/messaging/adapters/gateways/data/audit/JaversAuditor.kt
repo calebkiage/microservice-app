@@ -45,8 +45,8 @@ class JaversAuditor private constructor(
         this.javers.commit(author, new)
     }
 
-    override fun viewHistory(): List<Any> {
-        return this.javers.findSnapshots(QueryBuilder.byClass(MessageDto::class.java).limit(5).build()).map {
+    override fun viewHistory(size: Int): List<Any> {
+        return this.javers.findSnapshots(QueryBuilder.byClass(MessageDto::class.java).limit(size).build()).map {
             val type = when(it.type) {
                 SnapshotType.INITIAL -> "new"
                 SnapshotType.TERMINAL -> "deleted"

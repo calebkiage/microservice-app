@@ -7,7 +7,7 @@ Practice microservice app development
 The code follows the [clean architecture style](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html).
 
 ![Clean Architecture Representation](../docs/img/CleanArchitecture.jpg)
-> Classes marked with \<I> are interfaces.
+> Classes marked with `*<I>` are interfaces.
 > Open arrowheads are using relationships. Closed arrowheads are implements or
 > inheritance relationships. 
 

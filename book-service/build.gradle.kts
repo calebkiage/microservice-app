@@ -3,12 +3,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   id("io.gitlab.arturbosch.detekt") version "1.7.3"
   id("io.spring.dependency-management") version "1.0.10.RELEASE"
-  id("org.springframework.boot") version "2.4.0-RC1"
+  id("org.springframework.boot") version "2.4.1"
   kotlin("jvm") version "1.4.10"
   kotlin("plugin.spring") version "1.4.10"
 }
 
-extra["springCloudVersion"] = "2020.0.0-SNAPSHOT"
+extra["springCloudVersion"] = "2020.0.0"
 
 group = "com.example.microservice"
 version = "0.0.1-SNAPSHOT"
